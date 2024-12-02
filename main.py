@@ -2,14 +2,17 @@ import sys
 import random
 from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout
 from PyQt6.QtGui import QPainter, QColor, QPen
-from PyQt6.QtCore import Qt, QPoint
-from PyQt6 import uic
+
+from PyQt6.QtWidgets import QApplication, QMainWindow
+from Ui import Ui_MainWindow
 
 
-class MainWindow(QMainWindow):
+class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+
+        self.setupUi(self)
+
         self.pushButton.clicked.connect(self.add_circle)
         self.circles = []
 
@@ -25,7 +28,6 @@ class MainWindow(QMainWindow):
         painter.setPen(QPen(QColor(255, 255, 0), 2))
         for x, y, diameter in self.circles:
             painter.drawEllipse(x, y, diameter, diameter)
-
 
 
 if __name__ == '__main__':
